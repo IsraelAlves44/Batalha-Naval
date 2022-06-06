@@ -14,6 +14,41 @@ void screenCleaner() {
 	system("CLS");
 }
 
+void startBoard(char board[10][10]) {
+
+	int row, column;
+
+	for (row = 0; row < 10; row++)
+	{
+		for (column = 0; column < 10; column++)
+		{
+			board[row][column] = '*';
+
+		}
+	}
+}
+void showBoard(char board[10][10]) {
+	
+	int row, column;
+
+	for (row = 0; row < 10; row++)
+	{
+		for (column = 0; column < 10; column++)
+		{
+			cout << " " << board[row][column];
+		}
+		cout << "\n";
+	}
+}
+
+void play() {
+	char board[10][10]{};
+
+	startBoard(board);
+	showBoard(board);
+	
+}
+
 void initialMenu() 
 {
 	int option{};
@@ -31,7 +66,8 @@ void initialMenu()
 		switch (option)
 		{
 		case 1:
-			cout << "Jogo iniciado";
+			cout << "Jogo iniciado\n\n";
+			play();
 			break;
 		case 2:
 			cout << "Informações do jogo";
