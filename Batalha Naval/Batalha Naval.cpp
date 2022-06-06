@@ -14,7 +14,7 @@ void screenCleaner() {
 	system("CLS");
 }
 
-void startBoard(char board[10][10]) {
+void startBoard(char board[10][10],char mask[10][10]) {
 
 	int row, column;
 
@@ -22,12 +22,13 @@ void startBoard(char board[10][10]) {
 	{
 		for (column = 0; column < 10; column++)
 		{
-			board[row][column] = '*';
-
+			board[row][column] = 'A';
+			mask[row][column] = '*';
 		}
 	}
 }
-void showBoard(char board[10][10]) {
+
+void showBoard(char board[10][10],char mask[10][10]) {
 	
 	int row, column;
 
@@ -35,17 +36,33 @@ void showBoard(char board[10][10]) {
 	{
 		for (column = 0; column < 10; column++)
 		{
-			cout << " " << board[row][column];
+			cout << " " << mask[row][column];
 		}
 		cout << "\n";
 	}
 }
 
 void play() {
-	char board[10][10]{};
+	char board[10][10], mask[10][10]{};
+	int row{}, column{};
+	int playedRow, playedColumn;
+	int gameStatus = 1;
 
-	startBoard(board);
-	showBoard(board);
+	startBoard(board, mask);
+
+	while (gameStatus == 1)
+	{
+		screenCleaner();
+		showBoard(board, mask);
+
+		cout << "Digite uma linha: \n";
+		cin >> playedRow;
+		cout << "Digite uma coluna: \n"; 
+		cin >> playedColumn;
+		
+		// Revela o que está no tabuleiro
+		mask[playedRow][playedColumn] = board[playedRow][playedColumn];
+	}
 	
 }
 
