@@ -79,19 +79,21 @@ void play() {
 	int playedRow, playedColumn;
 	int gameStatus = 1;
 	int points = 0;
+	int attempts = 0, maximunAttempts = 5;
 	string message = "Bem-vindo ao Jogo!"; //feedback para o jogador
 
 	startBoard(board, mask);
 
 	boatPosition(board);
 
-	while (gameStatus == 1)
+	while (attempts < maximunAttempts)
 	{
 		
 		showBoard(board, mask);
 
 		cout << "\nPontos: " << points;
 		cout << "\n" << message;
+		cout << "\nTentativas Restantes: " << maximunAttempts - attempts;
 
 		cout << "\nDigite uma linha: ";
 		cin >> playedRow;
@@ -104,6 +106,8 @@ void play() {
 
 		// Revela o que está no tabuleiro
 		mask[playedRow][playedColumn] = board[playedRow][playedColumn];
+
+		attempts++;
 		
 	}
 	
