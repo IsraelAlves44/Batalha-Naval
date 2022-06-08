@@ -58,12 +58,28 @@ void boatPosition(char board[10][10]) {
 	}
 
 }
+void pointVerification(char board[10][10], int playedRow, int playedColumn, int *points, string *message) {
+
+	switch (board[playedRow][playedColumn])
+	{
+	case 'p':
+		*points += 10;
+		*message = "Você acertou um barco!";
+		break;
+	case 'A':
+		*message = "Você acertou a água!";
+	default:
+		break;
+	}
+}
 
 void play() {
 	char board[10][10], mask[10][10]{};
 	int row{}, column{};
 	int playedRow, playedColumn;
 	int gameStatus = 1;
+	int points = 0;
+	string message = "Bem-vindo ao Jogo!"; //feedback para o jogador
 
 	startBoard(board, mask);
 
@@ -74,13 +90,21 @@ void play() {
 		
 		showBoard(board, mask);
 
-		cout << "Digite uma linha: \n";
+		cout << "\nPontos: " << points;
+		cout << "\n" << message;
+
+		cout << "\nDigite uma linha: ";
 		cin >> playedRow;
-		cout << "Digite uma coluna: \n"; 
+		cout << "\nDigite uma coluna: "; 
 		cin >> playedColumn;
+
+	
+		pointVerification(board, playedRow, playedColumn, &points, &message);
 		
+
 		// Revela o que está no tabuleiro
 		mask[playedRow][playedColumn] = board[playedRow][playedColumn];
+		
 	}
 	
 }
@@ -125,10 +149,6 @@ int main()
 	setlocale(LC_ALL, "pt_BR.UTF-8");
 	
 	initialMenu();
-
-	
-
-	
 
 	return 0;
    
