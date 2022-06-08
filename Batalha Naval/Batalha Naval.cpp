@@ -11,6 +11,9 @@
 
 using namespace std;
 
+void play();
+void initialMenu();
+
 void screenCleaner() {
 	system("CLS");
 }
@@ -73,6 +76,24 @@ void pointVerification(char board[10][10], int playedRow, int playedColumn, int 
 	}
 }
 
+void endFeedback(int option){
+
+	switch (option)
+	{
+	case 1:
+		play();
+		break;
+	case 2:
+		initialMenu();
+		break;
+	case 3:
+		cout << "Até mais :)";
+		break;
+	default:
+		break;
+	}
+}
+
 void play() {
 	char board[10][10], mask[10][10]{};
 	int row{}, column{};
@@ -80,6 +101,7 @@ void play() {
 	int gameStatus = 1;
 	int points = 0;
 	int attempts = 0, maximunAttempts = 5;
+	int option = 0;
 	string message = "Bem-vindo ao Jogo!"; //feedback para o jogador
 
 	startBoard(board, mask);
@@ -110,7 +132,15 @@ void play() {
 		attempts++;
 		
 	}
-	
+	cout << "Fim de jogo! O que deseja fazer?";
+	cout << "\n1 - Jogar Novamente";
+	cout << "\n2 - Ir para o Menu";
+	cout << "\n3 - Sair";
+	cout << "\nDigite a opção e aperte ENTER: ";
+	cin >> option;
+
+	endFeedback(option);
+
 }
 
 void initialMenu() 
@@ -137,7 +167,7 @@ void initialMenu()
 			cout << "Informações do jogo";
 			break;;
 		case 3:
-			cout << "Até mais :)";
+			cout << "\nAté mais :)";
 			break;
 		default:
 			cout << "Erro, nenhuma opção valida!";
