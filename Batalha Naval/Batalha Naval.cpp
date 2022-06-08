@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void play();
+void play(string playersName);
 void initialMenu();
 
 void screenCleaner() {
@@ -76,12 +76,12 @@ void pointVerification(char board[10][10], int playedRow, int playedColumn, int 
 	}
 }
 
-void endFeedback(int option){
+void endFeedback(int option, string playersName){
 
 	switch (option)
 	{
 	case 1:
-		play();
+		play(playersName);
 		break;
 	case 2:
 		initialMenu();
@@ -94,7 +94,7 @@ void endFeedback(int option){
 	}
 }
 
-void play() {
+void play(string playersName) {
 	char board[10][10], mask[10][10]{};
 	int row{}, column{};
 	int playedRow, playedColumn;
@@ -103,6 +103,9 @@ void play() {
 	int attempts = 0, maximunAttempts = 5;
 	int option = 0;
 	string message = "Bem-vindo ao Jogo!"; //feedback para o jogador
+	
+
+	
 
 	startBoard(board, mask);
 
@@ -117,9 +120,9 @@ void play() {
 		cout << "\n" << message;
 		cout << "\nTentativas Restantes: " << maximunAttempts - attempts;
 
-		cout << "\nDigite uma linha: ";
+		cout << "\n" << playersName << ", digite uma linha: ";
 		cin >> playedRow;
-		cout << "\nDigite uma coluna: "; 
+		cout << "\n" << playersName << ", digite uma coluna: ";
 		cin >> playedColumn;
 
 	
@@ -139,13 +142,14 @@ void play() {
 	cout << "\nDigite a opção e aperte ENTER: ";
 	cin >> option;
 
-	endFeedback(option);
+	endFeedback(option, playersName);
 
 }
 
 void initialMenu() 
 {
 	int option{};
+	string playersName;
 
 	while (option < 1 || option > 3) {
 
@@ -160,8 +164,10 @@ void initialMenu()
 		switch (option)
 		{
 		case 1:
+			cout << "Digite seu nome: ";
+			cin >> playersName;
 			cout << "Jogo iniciado\n\n";
-			play();
+			play(playersName);
 			break;
 		case 2:
 			cout << "Informações do jogo";
