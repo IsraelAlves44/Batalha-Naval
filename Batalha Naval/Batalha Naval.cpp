@@ -6,6 +6,7 @@
 #include <string>
 #include <stdlib.h>
 #include <locale.h>
+#include <time.h>
 
 
 using namespace std;
@@ -41,6 +42,22 @@ void showBoard(char board[10][10],char mask[10][10]) {
 		cout << "\n";
 	}
 }
+void boatPosition(char board[10][10]) {
+	
+	int amount = 10, positionAmount = 0;
+
+	while (positionAmount < amount)
+	{
+		int boatRowPosition = rand() % 10;
+		int boatColumnPosition = rand() % 10;
+		
+		if (board[boatRowPosition][boatColumnPosition] == 'A') {
+			board[boatRowPosition][boatColumnPosition] = 'p';
+			positionAmount++;
+		}
+	}
+
+}
 
 void play() {
 	char board[10][10], mask[10][10]{};
@@ -50,9 +67,11 @@ void play() {
 
 	startBoard(board, mask);
 
+	boatPosition(board);
+
 	while (gameStatus == 1)
 	{
-		screenCleaner();
+		
 		showBoard(board, mask);
 
 		cout << "Digite uma linha: \n";
@@ -101,6 +120,8 @@ void initialMenu()
 
 int main()
 {
+	srand((unsigned)time(NULL));
+
 	setlocale(LC_ALL, "pt_BR.UTF-8");
 	
 	initialMenu();
